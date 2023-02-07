@@ -1,0 +1,5 @@
+20230207	00:20:28	cac76b67-1d8d-43ef-879d-63ee7c53088f	ReferenceError: user is not defined	POST	/register	undefined
+20230207	00:21:43	f803bfbc-bae1-4b55-8002-f9b4b57ec6a7	ReferenceError: userDB is not defined	POST	/register	undefined
+20230207	00:22:53	31aaa72e-8641-43f0-afac-189b0aa73293	TypeError: userDB.find is not a function	POST	/register	undefined
+20230207	00:24:31	ee50ab48-1400-4de1-9d91-b0689aa171d4	TypeError: userDB.find is not a function	POST	/register	undefined
+20230207	00:33:00	70943299-ee8f-445b-924d-2163d8ea9e31	TypeError: Cannot read properties of undefined (reading 'find')	POST	/register	undefined

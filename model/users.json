@@ -1,0 +1,17 @@
+[
+  {
+    "username": "messi",
+    "password": "$2b$10$m9pXZZHBq8SiImbHU789o.oeqAB1Lsu47n6i9M8puqnLb.9ZH7Ma6",
+    "role": "user"
+  },
+  {
+    "username": "ronaldo",
+    "password": "$2b$10$xa0ZZypOZ8lFq9.neleKgur.2VCqsYWvYVhuhG1JDY8GCNB31FDq2",
+    "role": "user"
+  },
+  {
+    "username": "pedri",
+    "password": "$2b$10$cL8R2SSrRSmTNiZ/aQ5bHesCscORM1WoUoXcvv5VsyY4.AjkVg0/W",
+    "role": "user"
+  }
+]
