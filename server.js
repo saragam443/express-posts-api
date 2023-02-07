@@ -47,6 +47,9 @@ mongoose.connection.once("open", () => {
   app.listen(PORT, () => console.log("server is running on port: ", PORT));
 });
 
+// app.listen(PORT, () => console.log("server is running on port: ", PORT));
+
+
 mongoose.connection.on("error", (err) => {
   logEvents(
     `${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`,

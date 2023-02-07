@@ -8,3 +8,12 @@
 20230207	00:25:55	ee4ddc2f-5857-49f6-a528-f982df18fc8c	undefined: ECONNREFUSED	querySrv	_mongodb._tcp.cluster0.wossnjy.mongodb.net
 20230207	00:25:58	6cee30b2-9ed8-4199-834f-ef64bfbd9075	undefined: ECONNREFUSED	querySrv	_mongodb._tcp.cluster0.wossnjy.mongodb.net
 20230207	00:28:45	b43d0858-7ac9-4404-b209-6160229b4097	undefined: ECONNREFUSED	querySrv	_mongodb._tcp.cluster0.wossnjy.mongodb.net
+20230207	15:10:08	40a52f6f-aa7b-4f43-ac77-5446a38a60ca	undefined: ECONNREFUSED	querySrv	_mongodb._tcp.cluster0.wossnjy.mongodb.net
+20230207	15:10:27	89e4c61e-c89f-487f-9430-861cc1dca33a	undefined: ECONNREFUSED	querySrv	_mongodb._tcp.cluster0.wossnjy.mongodb.net
+20230207	15:10:31	f757430c-1ab3-44e7-a0fb-66403dc2a739	undefined: ECONNREFUSED	querySrv	_mongodb._tcp.cluster0.wossnjy.mongodb.net
+20230207	15:11:00	37b2beaf-7ec0-4147-9448-e2c002014771	undefined: ECONNREFUSED	querySrv	_mongodb._tcp.cluster0.wossnjy.mongodb.net
+20230207	15:11:04	44091aab-683b-4ec3-be4b-9d3610b120d0	undefined: ECONNREFUSED	querySrv	_mongodb._tcp.cluster0.wossnjy.mongodb.net
+20230207	15:11:10	62dc3d40-8665-4edf-824d-e18518bc3150	undefined: ECONNREFUSED	querySrv	_mongodb._tcp.cluster0.wossnjy.mongodb.net
+20230207	15:18:40	30f740f7-6c8c-4352-a089-4791e3200958	undefined: ETIMEOUT	querySrv	_mongodb._tcp.cluster0.wossnjy.mongodb.net
+20230207	15:19:51	510296a3-3235-4c33-a6f0-7f4d9c196d96	undefined: ECONNREFUSED	querySrv	_mongodb._tcp.cluster0.wossnjy.mongodb.net
+20230207	15:19:54	9d82ac32-2d78-4aa3-b82a-9baef329e882	undefined: ECONNREFUSED	querySrv	_mongodb._tcp.cluster0.wossnjy.mongodb.net

@@ -1,15 +1,14 @@
 // const User = require("../model/User");
 const bcrypt = require("bcrypt");
-// const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const usersDB = {
   users: require("../model/users.json"),
   setUsers: function (data) {
     this.users = data;
   },
 };
-// const fsPromises = require("fs").promises;
-// const path = require("path");
-// const bcrypt = require("bcrypt");
+const fsPromises = require("fs").promises;
+const path = require("path");
 
 const handleLogin = async (req, res) => {
   const { username, password } = req.body;
@@ -25,37 +24,40 @@ const handleLogin = async (req, res) => {
   // evaluate password
   const match = await bcrypt.compare(password, foundUser.password);
   if (match) {
-    // const roles = Object.values(foundUser.roles);
-    //creat JWTs
-    // const accessToken = jwt.sign(
-    //   {
-    //     UserInfo: {
-    //       username: foundUser.username,
-    //       roles: roles,
-    //     },
-    //   },
-    //   process.env.ACCESS_TOKEN_SECRET,
-    //   { expiresIn: "90s" }
-    // );
-    // const refreshToken = jwt.sign(
-    //   { username: foundUser.username },
-    //   process.env.REFRESH_TOKEN_SECRET,
-    //   { expiresIn: "1d" }
-    // );
-    // // Saving refresh token with current users
-    // foundUser.refreshToken = refreshToken;
-    // const result = await foundUser.save();
-    // console.log(result);
+    const accessToken = jwt.sign(
+      { username: foundUser.username },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: "90s" }
+    );
+    const refreshToken = jwt.sign(
+      { username: foundUser.username },
+      process.env.REFRESH_TOKEN_SECRET,
+      { expiresIn: "1d" }
+    );
 
-    // res.cookie("jwt", refreshToken, {
-    //   httpOnly: true,
-    //   sameSite: "None",
-    //   // secure: true,
-    //   maxAge: 24 * 60 * 60 * 1000,
-    // });
-    // res.json({ accessToken }); // store in memory, front-end
+    // Saving refresh token with current users
 
-    res.json({ success: `user ${username} is logged in` });
+    const otherUsers = usersDB.users.filter(
+      (person) => person.username !== foundUser.username
+    );
+
+    const currentUser = { ...foundUser, refreshToken };
+
+    usersDB.setUsers([...otherUsers, currentUser]);
+
+    await fsPromises.writeFile(
+      path.join(__dirname, "..", "model", "users.json"),
+      JSON.stringify(usersDB.users)
+    );
+
+    res.cookie("jwt", refreshToken, {
+      httpOnly: true,
+      sameSite: "None",
+      // secure: true,
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+    res.json({ accessToken }); // store in memory, front-end
+
   } else {
     res.sendStatus(401); // unauthorized
   }
