@@ -4,7 +4,7 @@ const Users = require("../model/Users");
 
 const getAllPosts = async (req, res) => {
   const posts = await Posts.find().lean();
-  
+
   if (!posts?.length) {
     return res.status(400).json({ message: "posts not found" });
   }
@@ -27,6 +27,7 @@ const createNewPost = async (req, res) => {
   }
 
   const foundUser = await Users.findById(user).lean().exec();
+
 
   if (!foundUser) {
     return res.status(400).json({ message: `${user} user id not found` });

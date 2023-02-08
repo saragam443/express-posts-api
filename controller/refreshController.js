@@ -1,11 +1,4 @@
-const usersDB = {
-  users: require("../model/users.json"),
-  setUsers: function (data) {
-    this.users = data;
-  },
-};
-
-// const User = require("../model/User");
+const Users = require("../model/Users");
 const jwt = require("jsonwebtoken");
 
 const handleRefreshToken = async (req, res) => {
@@ -16,9 +9,9 @@ const handleRefreshToken = async (req, res) => {
 
   const refreshToken = cookies.jwt;
 
-  const foundUser = usersDB.users.find(
-    (person) => person.refreshToken === refreshToken
-  );
+  const foundUser = await Users.foundUser({
+    refreshToken,
+  }).exec();
 
   if (!foundUser) return res.sendStatus(403); // forbidden
 
@@ -29,7 +22,7 @@ const handleRefreshToken = async (req, res) => {
 
     //creat JWTs
     const accessToken = jwt.sign(
-      { username: decoded.username },
+      { username: foundUser.username },
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "2m" }
     );

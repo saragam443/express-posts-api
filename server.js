@@ -14,7 +14,7 @@ const credentials = require("./middleware/credentials")
 const PORT = process.env.PORT || 5002;
 
 mongoose.set("strictQuery", false);
-// connectDB();
+connectDB();
 
 app.use(logger);
 app.use(credentials)
@@ -44,13 +44,12 @@ app.all("*", (req, res) => {
 
 app.use(errorHandler);
 
-// mongoose.connection.once("open", () => {
-//   console.log("connected to database");
-//   app.listen(PORT, () => console.log("server is running on port: ", PORT));
-// });
+mongoose.connection.once("open", () => {
+  console.log("connected to database");
+  app.listen(PORT, () => console.log("server is running on port: ", PORT));
+});
 
-app.listen(PORT, () => console.log("server is running on port: ", PORT));
-
+// app.listen(PORT, () => console.log("server is running on port: ", PORT));
 
 mongoose.connection.on("error", (err) => {
   logEvents(
