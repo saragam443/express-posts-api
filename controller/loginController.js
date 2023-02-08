@@ -11,6 +11,7 @@ const fsPromises = require("fs").promises;
 const path = require("path");
 
 const handleLogin = async (req, res) => {
+  console.log(req.body);
   const { username, password } = req.body;
   if (!username || !password) {
     return res.status(400).json({ message: "username and password required" });
@@ -27,7 +28,7 @@ const handleLogin = async (req, res) => {
     const accessToken = jwt.sign(
       { username: foundUser.username },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "90s" }
+      { expiresIn: "2m" }
     );
     const refreshToken = jwt.sign(
       { username: foundUser.username },
@@ -53,7 +54,7 @@ const handleLogin = async (req, res) => {
     res.cookie("jwt", refreshToken, {
       httpOnly: true,
       sameSite: "None",
-      // secure: true,
+      secure: true,
       maxAge: 24 * 60 * 60 * 1000,
     });
     res.json({ accessToken }); // store in memory, front-end

@@ -10,13 +10,14 @@ const errorHandler = require("./middleware/errorHandler");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const connectDB = require("./config/dbConnect.js");
+const credentials = require("./middleware/credentials")
 const PORT = process.env.PORT || 5002;
 
 mongoose.set("strictQuery", false);
-connectDB();
+// connectDB();
 
 app.use(logger);
-
+app.use(credentials)
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -26,7 +27,8 @@ app.use(express.static(path.join(__dirname, "/public")));
 app.use("/", require("./routes/root"));
 app.use("/register", require("./routes/register"));
 app.use("/login", require("./routes/login"));
-
+app.use("/refresh", require("./routes/refresh"));
+app.use("/logout", require("./routes/logout"));
 app.use("/posts", require("./routes/postsRoute"));
 
 app.all("*", (req, res) => {
@@ -42,12 +44,12 @@ app.all("*", (req, res) => {
 
 app.use(errorHandler);
 
-mongoose.connection.once("open", () => {
-  console.log("connected to database");
-  app.listen(PORT, () => console.log("server is running on port: ", PORT));
-});
+// mongoose.connection.once("open", () => {
+//   console.log("connected to database");
+//   app.listen(PORT, () => console.log("server is running on port: ", PORT));
+// });
 
-// app.listen(PORT, () => console.log("server is running on port: ", PORT));
+app.listen(PORT, () => console.log("server is running on port: ", PORT));
 
 
 mongoose.connection.on("error", (err) => {
