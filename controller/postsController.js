@@ -1,70 +1,87 @@
-const Posts = require("../model/Posts");
-const Users = require("../model/Users");
-// const asyncHandler = require("express-async-handler"); // used express-async-errors instead
+const { v4: uuid } = require("uuid");
+const fsPromises = require("fs").promises;
+const path = require("path");
 
-const getAllPosts = async (req, res) => {
-  const posts = await Posts.find().lean();
+const postsDB = {
+  posts: require("../model/posts.json"),
+  setPosts: function (data) {
+    this.posts = data;
+  },
+};
 
-  if (!posts?.length) {
+const getAllPosts = (req, res) => {
+  const allPosts = postsDB.posts;
+
+  if (!allPosts?.length) {
     return res.status(400).json({ message: "posts not found" });
   }
 
-  const postsWithUser = await Promise.all(
-    posts.map(async (post) => {
-      const user = await Users.findById(post.user).lean().exec();
-      return { ...post, username: user.username };
-    })
-  );
-
-  res.json(postsWithUser);
+  res.json({
+    success: true,
+    message: "Posts fetched successfully",
+    data: allPosts,
+  });
 };
 
 const createNewPost = async (req, res) => {
-  const { user, title, content, category } = req.body;
+  const { title, content, category } = req.body;
 
-  if (!user || !title || !content || !category) {
+  if (!title || !content || !category) {
     return res.status(400).json({ message: "all fields are required" });
   }
 
-  const foundUser = await Users.findById(user).lean().exec();
+  const newPost = {
+    id: uuid(),
+    title,
+    content,
+    category,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
 
+  postsDB.setPosts([...postsDB.posts, newPost]);
 
-  if (!foundUser) {
-    return res.status(400).json({ message: `${user} user id not found` });
-  }
+  await fsPromises.writeFile(
+    path.join(__dirname, "..", "model", "posts.json"),
+    JSON.stringify(postsDB.posts)
+  );
 
-  const post = await Posts.create({ user, title, content, category });
-
-  if (post) {
-    res.status(201).json({ message: "new post created" });
-  } else {
-    res.status(400).json({ message: "invalid post data" });
-  }
+  res.status(201).json({
+    success: true,
+    message: "Post created successfully",
+    data: newPost,
+  });
 };
 
 const updatePost = async (req, res) => {
-  const { id, user, title, content, category } = req.body;
-  if (!id || !user || !title || !content) {
+  const { id, title, content, category } = req.body;
+
+  if (!id || !title || !content || !category) {
     return res.status(400).json({ message: "All fields are required" });
   }
-  const post = await Posts.findById(id).exec();
+
+  // parseint
+  const post = postsDB.posts.find((post) => post.id === id);
 
   if (!post) {
-    return res.status(400).json({ message: "post not found" });
-  }
-  const foundUser = await Users.findById(user).lean().exec();
-
-  if (!foundUser) {
-    return res.status(400).json({ message: `${user} user id not found` });
+    return res.status(400).json({ message: `Post ID ${id} not found` });
   }
 
-  post.user = user;
-  post.title = title;
-  post.content = content;
-  post.category = category;
+  (post.title = title),
+    (post.content = content),
+    (post.category = category),
+    (post.updatedAt = new Date());
 
-  const updatedPost = await post.save();
-  res.json({ message: "update complete" });
+  const unupdatedPosts = postsDB.posts.filter((post) => post.id !== id);
+
+  postsDB.setPosts([...unupdatedPosts, post]);
+
+  await fsPromises.writeFile(
+    path.join(__dirname, "..", "model", "posts.json"),
+    JSON.stringify(postsDB.posts)
+  );
+
+  res.json({ success: true, message: "Post updated successfully", data: post });
 };
 
 const deletePost = async (req, res) => {
@@ -74,13 +91,37 @@ const deletePost = async (req, res) => {
     return res.status(400).json({ message: "post id required" });
   }
 
-  const post = await Posts.findById(id).exec();
+  const post = postsDB.posts.find((post) => post.id === id);
+
   if (!post) {
-    return res.status(400).json({ message: "post not found" });
+    return res.status(400).json({ message: `Post ID ${id} not found` });
   }
 
-  const result = await post.deleteOne();
-  res.json(`Note '${result.title}' with ID ${result._id} deleted`);
+  const filteredArray = postsDB.posts.filter((post) => post.id !== id);
+
+  postsDB.setPosts([...filteredArray]);
+
+  await fsPromises.writeFile(
+    path.join(__dirname, "..", "model", "posts.json"),
+    JSON.stringify(postsDB.posts)
+  );
+  res.json({ success: true, message: "Post deleted successfully", data: post });
 };
 
-module.exports = { getAllPosts, createNewPost, deletePost, updatePost };
+// const getPost = (req, res) => {
+//   const Post = data.Posts.find((emp) => emp.id === parseInt(req.params.id));
+//   if (!Post) {
+//     return res
+//       .status(400)
+//       .json({ message: `Post ID ${req.params.id} not found` });
+//   }
+//   res.json(Post);
+// };
+
+module.exports = {
+  getAllPosts,
+  createNewPost,
+  updatePost,
+  deletePost,
+  // getPost,
+};
