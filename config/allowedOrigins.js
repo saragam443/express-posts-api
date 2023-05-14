@@ -1,5 +1,5 @@
 const allowedOrigins = [
-  "http://localhost:3000",
+  "https://saragam443.github.io/react-blog",
 ];
 
 module.exports = allowedOrigins;

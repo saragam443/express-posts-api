@@ -3,14 +3,14 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const path = require("path");
-// const { logger } = require("./middleware/logEvents");
+const { logger } = require("./middleware/logEvents");
 const cors = require("cors");
 const corsOptions = require("./config/corsOptions");
 const errorHandler = require("./middleware/errorHandler");
 const credentials = require("./middleware/credentials")
 const PORT = process.env.PORT || 3008;
 
-// app.use(logger);
+app.use(logger);
 app.use(credentials)
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
