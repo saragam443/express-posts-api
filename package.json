@@ -1,5 +1,5 @@
 {
-  "name": "my-site-backend",
+  "name": "express-posts-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
