@@ -1,5 +1,5 @@
 const allowedOrigins = [
-  "https://saragam443.github.io/react-blog",
+  "https://reactblog-kb8a.onrender.com",
 ];
 
 module.exports = allowedOrigins;
