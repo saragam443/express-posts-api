@@ -32,33 +32,41 @@ This project is a web application developed using Node.js and Express.js. It pro
 To run the API on your local machine, follow these steps:
 
 1. Start the server:
+
     ```shell
     npm start
     ```
 
-This will start the API server using the node server.js command.
+    This will start the API server using the node server.js command.
 
-Alternatively, you can use the development mode with automatic server restart on file changes:
+    Alternatively, you can use the development mode with automatic server restart on file changes:
 
-```shell
-npm run dev
-```
+    ```shell
+    npm run dev
+    ```
 
-This will start the API server using nodemon server.js for a better development experience.
+    This will start the API server using nodemon server.js for a better development experience.
 
 2. The API will now be accessible locally at http://localhost:3008 (or the specified port).
 
-You can send HTTP requests to the available endpoints using tools like Postman or cURL.
+    You can send HTTP requests to the available endpoints using tools like Postman or cURL.
 
-Note: Make sure to update the port number in server.js if you want to use a different port for running the API locally.
+    Note: Make sure to update the port number in server.js if you want to use a different port for running the API locally.
 
-Feel free to adjust the commands or port number based on your specific requirements.
+    Feel free to adjust the commands or port number based on your specific requirements.
 
 3.  Access the API endpoints using a RESTful approach.
-    Example endpoints: - GET /api/posts - Retrieve all posts - POST /api/posts - Create a new post - PATCH /api/posts - Update an existing post. The request body should contain an object with the following properties: - id (string): The id of the post to be updated. - title (string): The updated title of the post. - content (string): The updated content of the post. - category (string): The updated category of the post.
+    Example endpoints:
+    - GET /api/posts - Retrieve all posts
+    - POST /api/posts - Create a new post
+    - PATCH /api/posts - Update an existing post. The request body should contain an object with   the following properties:
+        - id (string): The id of the post to be updated.
+        - title (string): The updated title of the post.
+        - content (string): The updated content of the post.
+        - category (string): The updated category of the post.
 
-        - DELETE /api/posts - Delete a post. The request body should contain an object with the following property:
-            - id (string): The id of the post to be deleted.
+    - DELETE /api/posts - Delete a post. The request body should contain an object with the following property:
+        - id (string): The id of the post to be deleted.
 
 ## Technologies Used
 
