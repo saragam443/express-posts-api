@@ -13,25 +13,33 @@ This project is a web application developed using Node.js and Express.js. It pro
 ## Installation
 
 1. Clone the repository:
+
 ```shell
 git clone <repository-url>
 ```
-2. Navigate to the project directory: 
+
+2. Navigate to the project directory:
+
 ```shell
 cd <project-directory>
 ```
-3. Install dependencies: 
+
+3. Install dependencies:
+
 ```shell
 npm install
 ```
 
 ## Usage
+
 To run the API on your local machine, follow these steps:
 
 1. Start the server:
+
 ```shell
 npm start
 ```
+
 This will start the API server using the node server.js command.
 
 Alternatively, you can use the development mode with automatic server restart on file changes:
@@ -39,6 +47,7 @@ Alternatively, you can use the development mode with automatic server restart on
 ```shell
 npm run dev
 ```
+
 This will start the API server using nodemon server.js for a better development experience.
 
 2. The API will now be accessible locally at http://localhost:3008 (or the specified port).
@@ -49,27 +58,21 @@ Note: Make sure to update the port number in server.js if you want to use a diff
 
 Feel free to adjust the commands or port number based on your specific requirements.
 
+3.  Access the API endpoints using a RESTful approach.
+    Example endpoints: - GET /api/posts - Retrieve all posts - POST /api/posts - Create a new post - PATCH /api/posts - Update an existing post. The request body should contain an object with the following properties: - id (string): The id of the post to be updated. - title (string): The updated title of the post. - content (string): The updated content of the post. - category (string): The updated category of the post.
 
-3. Access the API endpoints using a RESTful approach.
-Example endpoints:
-    - GET /api/posts - Retrieve all posts
-    - POST /api/posts - Create a new post
-    - PATCH /api/posts - Update an existing post. The request body should contain an object with the following properties:
-        - id (string): The id of the post to be updated.
-        - title (string): The updated title of the post.
-        - content (string): The updated content of the post.
-        - category (string): The updated category of the post.
-
-    - DELETE /api/posts - Delete a post. The request body should contain an object with the following property:
-        - id (string): The id of the post to be deleted.
+        - DELETE /api/posts - Delete a post. The request body should contain an object with the following property:
+            - id (string): The id of the post to be deleted.
 
 ## Technologies Used
+
 1. Node.js
 2. Express.js
 3. date-fns
 4. uuid
 
 ## Logging
+
 The project includes a logging feature to track events and requests. Events are logged with timestamps, unique identifiers, and messages. The logs are stored in separate files for better organization and analysis.
 
 The project includes the following log files:
@@ -78,4 +81,6 @@ The project includes the following log files:
 - errorLog.log - Stores logs related to errors.
 
 ## Acknowledgements
+
 This project was developed as part of a learning experience and is for demonstration purposes only.
+
