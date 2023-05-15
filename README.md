@@ -13,32 +13,28 @@ This project is a web application developed using Node.js and Express.js. It pro
 ## Installation
 
 1. Clone the repository:
-
-```shell
-git clone <repository-url>
-```
+    ```shell
+    git clone https://github.com/saragam443/express-posts-api.git
+    ```
 
 2. Navigate to the project directory:
-
-```shell
-cd <project-directory>
-```
+    ```shell
+    cd express-posts-api
+    ```
 
 3. Install dependencies:
-
-```shell
-npm install
-```
+    ```shell
+    npm install
+    ```
 
 ## Usage
 
 To run the API on your local machine, follow these steps:
 
 1. Start the server:
-
-```shell
-npm start
-```
+    ```shell
+    npm start
+    ```
 
 This will start the API server using the node server.js command.
 
