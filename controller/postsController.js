@@ -60,7 +60,6 @@ const updatePost = async (req, res) => {
     return res.status(400).json({ message: "All fields are required" });
   }
 
-  // parseint
   const post = postsDB.posts.find((post) => post.id === id);
 
   if (!post) {
@@ -94,7 +93,7 @@ const deletePost = async (req, res) => {
   const post = postsDB.posts.find((post) => post.id === id);
 
   if (!post) {
-    return res.status(400).json({ message: `Post ID ${id} not found` });
+    // return res.status(400).json({ message: `Post ID ${id} not found` });
   }
 
   const filteredArray = postsDB.posts.filter((post) => post.id !== id);
